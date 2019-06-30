@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{% block page_title %}{% endblock %}</title>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    </head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="nav navbar-header">
+          <a class="navbar-brand" href="/"><strong>MDC Commercial LTD</strong></a>
+            <button type="button" class="navbar-toggle collapsed" 
+            data-toggle="collapse" data-target="#myCollapsingList">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>	    
+        <ul id="myCollapsingList" class="nav navbar-nav 
+        collapse navbar-collapse">
+        
+        {% if user.is_authenticated %}
+            <li><a data-toggle="collapse" data-target=".navbar-collapse" class="btn btn-link" href= "{% url 'profile' %}">Profile</a></li>
+            <li><a data-toggle="collapse" data-target=".navbar-collapse" class="btn btn-link" href="{% url 'logout' %}">Logout</a></li>
+        {% else %}  
+            <li><a data-toggle="collapse" data-target=".navbar-collapse" class="btn btn-link" href="{% url 'registration' %}" role="button">Register</a></li>
+            <li><a data-toggle="collapse" data-target=".navbar-collapse" class="btn btn-link" href="{% url 'login' %}" role="button">Login</a></li>
+        {% endif %}
+            <li><a data-toggle="collapse" data-target=".navbar-collapse" href="/FirstStep">Information</a></li>
+            <li><a data-toggle="collapse" data-target=".navbar-collapse" href="/Calc">Calculator</a></li>
+            <li><a data-toggle="collapse" data-target=".navbar-collapse" href="/Gallery">Gallery</a></li>
+            <li><a data-toggle="collapse" data-target=".navbar-collapse" href="/Suppliers">Suppliers</a></li>
+        </ul>
+    </div>	
+    
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-8 col-md-6 col-sm-4 btn-holder"></div>
+            <div class="col-lg-4 col-md-6 col-sm-8">
+                <h2>MDC Commerail LDT</h2>
+                    <p>Text HERE</p>
+                    <p>more Text</p>
+                    <p>This is Work By Kenrick Hatton for MDC Commercail LTD</p>
+            </div>        
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <h1>{% block page_heading %}{% endblock %}</h1>
+    
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+</body>
+</html>
